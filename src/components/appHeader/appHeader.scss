@@ -1,0 +1,40 @@
+@import '../../style/variables.scss';
+
+
+
+.app {
+    &__header {
+        display: flex;
+        justify-content: center;
+    }
+    &__title {
+        font-weight: bold;
+        font-size: 28px;
+        line-height: 37px;
+        span {
+            color: $main-color;
+        }
+    }
+    &__menu {
+        ul {
+            display: grid;
+            align-items: center;
+            grid-template-columns: repeat(4, 200px);
+            justify-content: center;
+            font-weight: bold;
+            font-size: 30px;
+            line-height: 32px;
+            li {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 0 8px;
+                color: black;
+                a:hover {
+                    color: $main-color;
+                    filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0));
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,74 @@
+@import '../../style/variables.scss';
+
+.timetable {
+    &__module {
+        display: grid;
+        width: 870px;
+        height: 366px;
+        grid-template-rows: 60px 1fr ;
+        row-gap: 10px;
+        border-radius: 30px;
+        background-color: #5a4444;
+        filter: drop-shadow(10px 10px 4px rgba(0, 0, 0, 0.5));
+        &-name {
+            font-weight: bold;
+            font-size: 22px;
+            line-height: 29px;
+            text-transform: uppercase;
+        }
+        .skeleton {
+            margin-top: 30px;
+        }
+    }
+    &__hourly {
+        text-align: center;
+        &-name {
+            margin-top: 5px;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 32px;
+            line-height: 48px;
+        }
+    }
+    &__info {
+        display: grid;
+        margin: 0 80px 0 80px;
+        grid-template-columns: repeat(5, 1fr);
+        grid-auto-rows: 270px;
+        grid-gap: 10px;
+    }
+    &__block {
+        background: #373636;
+        border-radius: 40px;
+        &-time {
+            margin-top: 10px;
+            text-align: center;
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 36px;
+        }
+        &-photo {
+            text-align: center;
+        }
+        &-celsius {
+            text-align: center;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 30px;
+        }
+        &-navigation {
+            img {
+                margin-left: 22px;
+            }
+        }
+        &-speed {
+            text-align: center;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 30px;
+        }
+    }
+
+}
