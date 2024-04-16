@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/App';
-import WeatherService from './services/WeatherService';
 import './style/style.scss';
 
-const weatherServise = new WeatherService();
 
-weatherServise.getAllIndexes().then(res => console.log(res));
+// const weatherServise = new WeatherService();
+
+// weatherServise.getAllIndexes().then(res => console.log(res.location.name));
 
 ReactDOM.render(
   <React.StrictMode>

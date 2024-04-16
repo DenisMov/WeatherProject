@@ -19,4 +19,11 @@ const App = () => {
     )
 }
 
+setTimeout(
+    () => {
+        App()
+    },
+    60 * 1000
+);
+
 export default App;

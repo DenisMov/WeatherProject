@@ -1,3 +1,4 @@
+import React, {useState} from 'react';
 import './appHeader.scss';
 
 const AppHeader = () => {
@@ -5,14 +6,16 @@ const AppHeader = () => {
         <header className="app__header">
             <nav className="app__menu">
                 <ul>
-                    <li><a href="#">Kiev</a></li>
-                    <li><a href="#">Zhashkiv</a></li>
-                    <li><a href="#">Paris</a></li>
-                    <li><a href="#">Washington</a></li>
+                    {/* Для каждого города добавляем обработчик клика */}
+                    <li><a href="#1" >Kiev</a></li>
+                    <li><a href="#2" >Zhashkiv</a></li>
+                    <li><a href="#3" >Paris</a></li>
+                    <li><a href="#4" >Washington</a></li>
                 </ul>
             </nav>
         </header>
-    )
-}
+    );
+};
+
 
 export default AppHeader;

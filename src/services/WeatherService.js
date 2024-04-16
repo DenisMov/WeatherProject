@@ -1,6 +1,9 @@
 
 
 class WeatherService {
+    _apiBase = 'http://api.weatherapi.com/v1/'
+    _apiKey = 'key=d4482eb276b541a8a1b161131240804&'
+
     getResource = async(url) => {
         let res = await fetch(url);
 
@@ -11,8 +14,13 @@ class WeatherService {
         return res.json();
     }
 
-    getAllIndexes = () => {
-        return this.getResource('http://api.weatherapi.com/v1/current.json?key=d4482eb276b541a8a1b161131240804&q=London&aqi=no');
+
+    getAllIndexes = (id) => {
+        return this.getResource(`${this._apiBase}current.json?${this._apiKey}&q=${id}&aqi=no`);
+    }
+
+    getForecastIndexes = (id) => {
+        return this.getResource(`${this._apiBase}forecast.json?${this._apiKey}&q=${id}&days=5&aqi=no&alerts=no`);
     }
 }
 
