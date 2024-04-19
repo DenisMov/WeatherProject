@@ -1,16 +1,15 @@
 import React, {useState} from 'react';
 import './appHeader.scss';
 
-const AppHeader = () => {
+const AppHeader = ({setCity}) => {
     return (
         <header className="app__header">
             <nav className="app__menu">
                 <ul>
-                    {/* Для каждого города добавляем обработчик клика */}
-                    <li><a href="#1" >Kiev</a></li>
-                    <li><a href="#2" >Zhashkiv</a></li>
-                    <li><a href="#3" >Paris</a></li>
-                    <li><a href="#4" >Washington</a></li>
+                    <li onClick={() => setCity('Zhashkiv')}>Kiev</li>
+                    <li onClick={() => setCity('Zhashkiv')}>Zhashkiv</li>
+                    <li onClick={() => setCity('Paris')} >Paris</li>
+                    {/* <li><a  >Washington</a></li> */}
                 </ul>
             </nav>
         </header>

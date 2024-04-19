@@ -9,9 +9,8 @@ import './style/style.scss';
 // weatherServise.getAllIndexes().then(res => console.log(res.location.name));
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  
+    <App />,
   document.getElementById('root')
 );
 
