@@ -6,7 +6,7 @@ const AppHeader = ({setCity}) => {
         <header className="app__header">
             <nav className="app__menu">
                 <ul>
-                    <li onClick={() => setCity('Zhashkiv')}>Kiev</li>
+                    <li onClick={() => setCity('Kyiv')}>Kiev</li>
                     <li onClick={() => setCity('Zhashkiv')}>Zhashkiv</li>
                     <li onClick={() => setCity('Paris')} >Paris</li>
                     {/* <li><a  >Washington</a></li> */}

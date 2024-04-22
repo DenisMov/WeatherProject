@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './weatherIndexes.scss';
 
 import sunriseLogo from '../../resources/img/Sun/sunrise-white.png'
@@ -9,7 +9,7 @@ import windLogo from '../../resources/img/Sun/wind.png'
 import pressureLogo from '../../resources/img/Sun/pressure-white.png'
 import uvLogo from '../../resources/img/Sun/uv-white.png'
 
-const WeatherIndexes = ({data}) => {
+
            //          name: res.location.name, 
 //                 time: res.location.localtime.slice(11), 
 //                 day: res.location.localtime.slice(0, 11),
@@ -23,12 +23,17 @@ const WeatherIndexes = ({data}) => {
 //                 pressureIndexes: res.current.pressure_mb,
 //                 windIndexes: res.current.wind_kph,
 //                 uvIndexes: res.current.uv
+
+const WeatherIndexes = ({data}) => {
     
-    const { location: { name, localtime} = {}, 
-            current: { temp_c, feelslike_c } = {}, 
-            forecast: { forecastday } = {},
-        
-        } = data
+    const { 
+        location: { name, localtime } = {},
+        current: { temp_c, feelslike_c, condition } = {},
+        forecast: { forecastday } = {}
+    } = data;
+
+    const conditionIcon = forecastday && forecastday[0] && forecastday[0].hour && forecastday[0].hour[0] && forecastday[0].hour[0].condition && forecastday[0].hour[0].condition.icon;
+
 
     return (
         <div className="weather">
@@ -43,7 +48,7 @@ const WeatherIndexes = ({data}) => {
             <div className="weather__static">
                 <div className='weather__firstblock'>
                     <div>
-                        <p className="weather__firstblock-celsius">{temp_c}</p>
+                        <p className="weather__firstblock-celsius">{temp_c}°C</p>
                         <div className='weather__firstblock-block'>
                             <p className="weather__firstblock-like">Feels like:</p>
                             <p className="weather__firstblock-likecels">{feelslike_c}°C</p>
@@ -55,15 +60,15 @@ const WeatherIndexes = ({data}) => {
                                 <img src={sunriseLogo} alt="sunrise" />
                             </div>
                             
-                            <p className="weather__firstblock-sunrise">Sunrise <br/> {sunrise && forecastday[0].astro.sunrise}</p>
+                            <p className="weather__firstblock-sunrise">Sunrise <br/> {conditionIcon}</p>
                         </div>
                         
-                        {/* <div className='weather__firstblock-sunblock'>
+                        <div className='weather__firstblock-sunblock'>
                             <div className='weather__firstblock-logo'>
                                 <img src={sunsetLogo} alt="sunrise" />
                             </div>
-                            <p className="weather__firstblock-sunset">Sunset <br/> {forecastday.astro.sunset}</p>
-                        </div> */}
+                            <p className="weather__firstblock-sunset">Sunset <br/> {}</p>
+                        </div>
                     </div>
                 </div>
 
@@ -143,3 +148,5 @@ export default WeatherIndexes;
 //             })
 //         })
 // }
+
+

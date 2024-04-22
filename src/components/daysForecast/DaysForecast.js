@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import WeatherService from '../../services/WeatherService';
 import './daysForecast.scss';
 
@@ -6,12 +6,8 @@ import './daysForecast.scss';
 const DaysForecast = ({data}) => {
 
     const { location: { name } = {}, 
-
-
-
-
             current: {temp_c } = {}
-                                    } = data 
+        } = data 
 
 
 
