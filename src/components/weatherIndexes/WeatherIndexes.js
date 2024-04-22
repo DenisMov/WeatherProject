@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './weatherIndexes.scss';
+import WeatherService from '../../services/WeatherService';
 
 import sunriseLogo from '../../resources/img/Sun/sunrise-white.png'
 import sunsetLogo from '../../resources/img/Sun/sunset-white.png'
@@ -10,48 +11,74 @@ import pressureLogo from '../../resources/img/Sun/pressure-white.png'
 import uvLogo from '../../resources/img/Sun/uv-white.png'
 
 
-           //          name: res.location.name, 
-//                 time: res.location.localtime.slice(11), 
-//                 day: res.location.localtime.slice(0, 11),
-//                 selsius: res.current.temp_c,
-//                 feelsLike: res.current.feelslike_c,
-//                 sunriseAm: res.forecast.forecastday[0].astro.sunrise,
-//                 sunsetAm: res.forecast.forecastday[0].astro.sunset,
-//                 condition: res.forecast.forecastday[0].hour[0].condition.icon,
-//                 conditionText: res.forecast.forecastday[0].hour[0].condition.text,
-//                 humidityPercent: res.current.humidity,
-//                 pressureIndexes: res.current.pressure_mb,
-//                 windIndexes: res.current.wind_kph,
-//                 uvIndexes: res.current.uv
+const WeatherIndexes = () => {
+    const [weatherData, setWeatherData] = useState({
+        name: null,
+        time: null,
+        day: null,
+        selsius: null,
+        feelsLike: null,
+        sunriseAm: null,
+        sunsetAm: null,
+        condition: null,
+        conditionText: null,
+        humidityPercent: null,
+        pressureIndexes: null,
+        windIndexes: null,
+        uvIndexes: null
+    });
 
-const WeatherIndexes = ({data}) => {
-    
-    const { 
-        location: { name, localtime } = {},
-        current: { temp_c, feelslike_c, condition } = {},
-        forecast: { forecastday } = {}
-    } = data;
+    useEffect(() => {
+        const weatherService = new WeatherService();
+        const id = 'Kyiv';
 
-    const conditionIcon = forecastday && forecastday[0] && forecastday[0].hour && forecastday[0].hour[0] && forecastday[0].hour[0].condition && forecastday[0].hour[0].condition.icon;
+        const fetchData = async () => {
+            try {
+                const res = await weatherService.getForecastIndexes(id);
+                setWeatherData({
+                    name: res.location.name,
+                    time: res.location.localtime.slice(11),
+                    day: res.location.localtime.slice(0, 11),
+                    selsius: res.current.temp_c,
+                    feelsLike: res.current.feelslike_c,
+                    sunriseAm: res.forecast.forecastday[0].astro.sunrise,
+                    sunsetAm: res.forecast.forecastday[0].astro.sunset,
+                    condition: res.forecast.forecastday[0].hour[0].condition.icon,
+                    conditionText: res.forecast.forecastday[0].hour[0].condition.text,
+                    humidityPercent: res.current.humidity,
+                    pressureIndexes: res.current.pressure_mb,
+                    windIndexes: res.current.wind_kph,
+                    uvIndexes: res.current.uv
+                });
+            } catch (error) {
+                console.error('Error fetching weather data:', error);
+            }
+        };
 
+        fetchData();
+
+    }, []); // Пустой массив означает, что этот эффект выполняется только при монтировании
+
+    const { name, time, day, selsius, feelsLike, sunriseAm, sunsetAm, condition,
+        conditionText, humidityPercent, pressureIndexes, windIndexes, uvIndexes } = weatherData;
 
     return (
         <div className="weather">
             <div className="weather__block">
                 <div className="weather__info">
-                    <p className="weather__name" >{name}</p>
-                    <p className="weather__time">{localtime && localtime.slice(11)}</p>
-                    <p className="weather__day">{localtime && localtime.slice(0, 11)}</p>
+                    <p className="weather__name">{name}</p>
+                    <p className="weather__time">{time}</p>
+                    <p className="weather__day">{day}</p>
                 </div>
             </div>
 
             <div className="weather__static">
                 <div className='weather__firstblock'>
                     <div>
-                        <p className="weather__firstblock-celsius">{temp_c}°C</p>
+                        <p className="weather__firstblock-celsius">{selsius}</p>
                         <div className='weather__firstblock-block'>
                             <p className="weather__firstblock-like">Feels like:</p>
-                            <p className="weather__firstblock-likecels">{feelslike_c}°C</p>
+                            <p className="weather__firstblock-likecels">{feelsLike}°C</p>
                         </div>
                     </div>
                     <div className='weather__firstblock-sunriseblock'>
@@ -59,24 +86,25 @@ const WeatherIndexes = ({data}) => {
                             <div className='weather__firstblock-logo'>
                                 <img src={sunriseLogo} alt="sunrise" />
                             </div>
-                            
-                            <p className="weather__firstblock-sunrise">Sunrise <br/> {conditionIcon}</p>
+
+                            <p className="weather__firstblock-sunrise">Sunrise <br /> {sunriseAm}</p>
                         </div>
-                        
+
                         <div className='weather__firstblock-sunblock'>
                             <div className='weather__firstblock-logo'>
                                 <img src={sunsetLogo} alt="sunrise" />
                             </div>
-                            <p className="weather__firstblock-sunset">Sunset <br/> {}</p>
+                            <p className="weather__firstblock-sunset">Sunset <br /> {sunsetAm}</p>
                         </div>
+
                     </div>
                 </div>
 
-                {/* <div className='weather__secondblock'>
+                <div className='weather__secondblock'>
                     <div className='weather__secondblock-logo'>
-                        <img src={conditionLogo} alt="sunny" />
+                        <img src={SunnyLogo} alt="sunny" />
                     </div>
-                        
+
                     <p className="weather__secondblock-sunny">{conditionText}</p>
                 </div>
 
@@ -89,7 +117,7 @@ const WeatherIndexes = ({data}) => {
                         <p className="weather__thirdblock-huminterest">{humidityPercent}% </p>
                         <p className="weather__thirdblock-humtext">Humidity</p>
                     </div>
-                    
+
                     <div className='weather__thirdblock-wind'>
                         <div className='weather__thirdblock-windlogo'>
                             <img src={windLogo} alt="photo" />
@@ -105,7 +133,7 @@ const WeatherIndexes = ({data}) => {
                         <p className="weather__thirdblock-pressinterest">{pressureIndexes}hPa</p>
                         <p className="weather__thirdblock-presstext">Pressure</p>
                     </div>
-                    
+
                     <div className='weather__thirdblock-uv'>
                         <div className='weather__thirdblock-uvlogo'>
                             <img src={uvLogo} alt="photo" />
@@ -113,40 +141,10 @@ const WeatherIndexes = ({data}) => {
                         <p className="weather__thirdblock-uvinterest">{uvIndexes}</p>
                         <p className="weather__thirdblock-uvtext">UV</p>
                     </div>
-                </div> */}
+                </div>
             </div>
         </div>
-    )
-    
-}
+    );
+};
 
 export default WeatherIndexes;
-
-
-
-//                 
-// updateWeather = () => {
-//     const id = 'Kyiv';
-//     this.weatherServise
-//         .getForecastIndexes(id)
-//         // .then(res => console.log(res.location.name));
-//         .then(res => {
-//             this.setState({
-//                 name: res.location.name, 
-//                 time: res.location.localtime.slice(11), 
-//                 day: res.location.localtime.slice(0, 11),
-//                 selsius: res.current.temp_c,
-//                 feelsLike: res.current.feelslike_c,
-//                 sunriseAm: res.forecast.forecastday[0].astro.sunrise,
-//                 sunsetAm: res.forecast.forecastday[0].astro.sunset,
-//                 condition: res.forecast.forecastday[0].hour[0].condition.icon,
-//                 conditionText: res.forecast.forecastday[0].hour[0].condition.text,
-//                 humidityPercent: res.current.humidity,
-//                 pressureIndexes: res.current.pressure_mb,
-//                 windIndexes: res.current.wind_kph,
-//                 uvIndexes: res.current.uv
-//             })
-//         })
-// }
-
-
