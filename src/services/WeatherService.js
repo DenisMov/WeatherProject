@@ -20,7 +20,7 @@ class WeatherService {
     }
 
     getForecastIndexes = (id) => {
-        return this.getResource(`${this._apiBase}forecast.json?${this._apiKey}&q=${id}&days=5&aqi=no&alerts=no`);
+        return this.getResource(`${this._apiBase}forecast.json?${this._apiKey}&q=${id}&days=7&aqi=no&alerts=no`);
     }
 }
 

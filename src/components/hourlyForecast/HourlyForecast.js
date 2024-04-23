@@ -9,18 +9,16 @@ import navigation1 from '../../resources/img/navigation/navigation1.png'
 import navigation2 from '../../resources/img/navigation/navigation2.png'
 
 
-const HourlyForecast = () => {
+const HourlyForecast = ({ city, getResource }) => {
     const [forecastData, setForecastData] = useState(null);
 
     useEffect(() => {
-        const weatherService = new WeatherService();
-        const id = 'Kyiv';
-
-        weatherService.getForecastIndexes(id)
+        
+        getResource(`http://api.weatherapi.com/v1/forecast.json?key=d4482eb276b541a8a1b161131240804&q=${city}&days=1&aqi=yes&alerts=no`)
             .then(res => {
                 let filteredHours = res.forecast.forecastday[0].hour.filter(hour => {
                     const hourOfDay = new Date(hour.time).getHours();
-                    return hourOfDay === 12 || hourOfDay === 14 || hourOfDay === 16 || hourOfDay === 18;
+                    return hourOfDay === 12 || hourOfDay === 15 || hourOfDay === 18 || hourOfDay === 21;
                 });
 
                 const midnightHour = res.forecast.forecastday[0].hour.find(hour => {
@@ -37,7 +35,7 @@ const HourlyForecast = () => {
             .catch(error => {
                 console.error('Error fetching weather data:', error);
             });
-    }, []);
+    }, [city, getResource]);
 
     return (
         <div className="timetable__module">

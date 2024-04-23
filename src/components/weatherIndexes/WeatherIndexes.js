@@ -59,7 +59,7 @@ const WeatherIndexes = () => {
 
     }, []); // Пустой массив означает, что этот эффект выполняется только при монтировании
 
-    const { name, time, day, selsius, feelsLike, sunriseAm, sunsetAm, condition,
+    const { name, time, day, selsius, feelsLike, sunriseAm, sunsetAm,
         conditionText, humidityPercent, pressureIndexes, windIndexes, uvIndexes } = weatherData;
 
     return (

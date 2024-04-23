@@ -45,7 +45,7 @@ const App = () => {
                 <WeatherIndexes data={data}/>
                 <div className="timetable__content">
                     <DaysForecast data={data}/>
-                    <HourlyForecast data={data}/>
+                    <HourlyForecast city={city} getResource={getResource} />
                 </div>
             </main>
         </div>
