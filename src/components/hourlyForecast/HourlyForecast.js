@@ -1,12 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
-import WeatherService from '../../services/WeatherService';
 import './hourlyForecast.scss';
 
-import clear2 from '../../resources/img/clear2.png'
-import clouds1 from '../../resources/img/clouds1.png'
 import navigation1 from '../../resources/img/navigation/navigation1.png'
-import navigation2 from '../../resources/img/navigation/navigation2.png'
 
 
 const HourlyForecast = ({ city, getResource }) => {

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import WeatherService from '../../services/WeatherService';
 import './daysForecast.scss'
 
 
@@ -23,40 +22,33 @@ const DaysForecast = ({ city, getResource }) => {
     });
 
     useEffect(() => {
-        const weatherService = new WeatherService();
-        const id = 'Kyiv';
-
-        const fetchData = async () => {
-            try {
-                const res = await weatherService.getForecastIndexes(id);
-                setWeatherData(prevState => ({
-                    weatherLogoOne: res.forecast.forecastday[0].hour[12]?.condition?.icon,
+        getResource(`http://api.weatherapi.com/v1/forecast.json?key=d4482eb276b541a8a1b161131240804&q=${city}&days=5&aqi=yes&alerts=no`)
+            .then(res => {
+                setWeatherData({
+                    weatherLogoOne: res.forecast.forecastday[0]?.hour[12]?.condition?.icon || null,
                     selsiusOne: res.forecast.forecastday[0]?.hour[12]?.temp_c || null,
-                    dataOne: res.forecast.forecastday[0]?.hour[12].time.slice(0, 11),
+                    dataOne: res.forecast.forecastday[0]?.hour[12]?.time?.slice(0, 11) || null,
                     weatherLogoTwo: res.forecast.forecastday[1]?.hour[12]?.condition?.icon || null,
                     selsiusTwo: res.forecast.forecastday[1]?.hour[12]?.temp_c || null,
-                    dataTwo: res.forecast.forecastday[1]?.hour[12]?.time.slice(0, 11) || null,
-                    weatherLogoTree: res.forecast.forecastday[2]?.hour[12]?.condition?.icon || null,
-                    selsiusTree: res.forecast.forecastday[2]?.hour[12]?.temp_c || null,
-                    dataTree: res.forecast.forecastday[2]?.hour[12]?.time?.slice(0, 11) || null,
-                    weatherLogoThird: res.forecast.forecastday[2]?.hour[12]?.condition?.icon || null,
-                    selsiusThird: res.forecast.forecastday[2]?.hour[12]?.temp_c || null,
-                    dataThird: res.forecast.forecastday[2]?.hour[12]?.time?.slice(0, 11) || null,
-                    weatherLogoFive: res.forecast.forecastday[1]?.hour[12]?.condition?.icon || null,
-                    selsiusFive: res.forecast.forecastday[1]?.hour[12]?.temp_c || null,
-                    dataFive: res.forecast.forecastday[1]?.hour[12]?.time?.slice(0, 11) || null
-                }));
-            } catch (error) {
+                    dataTwo: res.forecast.forecastday[1]?.hour[12]?.time?.slice(0, 11) || null,
+                    weatherLogoThree: res.forecast.forecastday[2]?.hour[12]?.condition?.icon || null,
+                    selsiusThree: res.forecast.forecastday[2]?.hour[12]?.temp_c || null,
+                    dataThree: res.forecast.forecastday[2]?.hour[12]?.time?.slice(0, 11) || null,
+                    weatherLogoFour: res.forecast.forecastday[1]?.hour[12]?.condition?.icon || null,
+                    selsiusFour: res.forecast.forecastday[1]?.hour[12]?.temp_c || null,
+                    dataFour: res.forecast.forecastday[1]?.hour[12]?.time?.slice(0, 11) || null,
+                    weatherLogoFive: res.forecast.forecastday[0]?.hour[12]?.condition?.icon || null,
+                    selsiusFive: res.forecast.forecastday[0]?.hour[12]?.temp_c || null,
+                    dataFive: res.forecast.forecastday[0]?.hour[12]?.time?.slice(0, 11) || null
+                });
+            }) 
+            .catch (error => {
                 console.error('Error fetching weather data:', error);
-            }
-        };
+            })
+    }, [city, getResource]);
 
-        fetchData();
-
-    }, []);
-
-    const { weatherLogoOne, selsiusOne, dataOne, weatherLogoTwo, selsiusTwo, dataTwo, weatherLogoTree,
-        selsiusTree, dataTree, weatherLogoThird, selsiusThird, dataThird, weatherLogoFive, selsiusFive, dataFive } = weatherData;
+    const { weatherLogoOne, selsiusOne, dataOne, weatherLogoTwo, selsiusTwo, dataTwo, weatherLogoThree,
+        selsiusThree, dataThree, weatherLogoFour, selsiusFour, dataFour, weatherLogoFive, selsiusFive, dataFive } = weatherData;
 
     return (
         <div className="timetable__list">
@@ -79,18 +71,18 @@ const DaysForecast = ({ city, getResource }) => {
 
             <div className="timetable__thirdyday">
                 <div className="timetable__thirdyday-photo">
-                    <img src={weatherLogoTree} alt="photo" />
+                    <img src={weatherLogoThree} alt="photo" />
                 </div>
-                <p className="timetable__thirdyday-celsius">{selsiusTree}°C</p>
-                <p className="timetable__thirdyday-day">{dataTree}</p>
+                <p className="timetable__thirdyday-celsius">{selsiusThree}°C</p>
+                <p className="timetable__thirdyday-day">{dataThree}</p>
             </div>
 
             <div className="timetable__fourthday">
                 <div className="timetable__fourthday-photo">
-                    <img src={weatherLogoThird} alt="photo" />
+                    <img src={weatherLogoFour} alt="photo" />
                 </div>
-                <p className="timetable__fourthday-celsius">{selsiusThird}°C</p>
-                <p className="timetable__fourthday-day">{dataThird}</p>
+                <p className="timetable__fourthday-celsius">{selsiusFour}°C</p>
+                <p className="timetable__fourthday-day">{dataFour}</p>
             </div>
 
             <div className="timetable__fifthday">

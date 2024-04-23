@@ -15,6 +15,7 @@
             color: $main-color;
         }
     }
+    
     &__menu {
         ul {
             display: grid;
@@ -30,6 +31,7 @@
                 align-items: center;
                 margin: 0 8px;
                 color: black;
+                transition: all 0.3s ease;
                 a:hover {
                     color: $main-color;
                     filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0));
@@ -37,4 +39,10 @@
             }
         }
     }
+}
+.app__menu ul li.selected {
+    font-size: 35px;
+    font-weight: bold; /* Жирный шрифт для выделенного города */
+    color: $main-color;
+    filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0));
 }

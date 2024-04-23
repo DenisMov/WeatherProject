@@ -42,9 +42,9 @@ const App = () => {
         <div className="app">
             <AppHeader setCity={setCity}/>
             <main>
-                <WeatherIndexes data={data}/>
+                <WeatherIndexes city={city} getResource={getResource} data={data} />
                 <div className="timetable__content">
-                    <DaysForecast data={data}/>
+                    <DaysForecast  city={city} getResource={getResource} data={data}/>
                     <HourlyForecast city={city} getResource={getResource} />
                 </div>
             </main>

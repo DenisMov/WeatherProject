@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import './weatherIndexes.scss';
-import WeatherService from '../../services/WeatherService';
 
 import sunriseLogo from '../../resources/img/Sun/sunrise-white.png'
 import sunsetLogo from '../../resources/img/Sun/sunset-white.png'
-import SunnyLogo from '../../resources/img/Sun/clearMax.png'
+// import SunnyLogo from '../../resources/img/Sun/clearMax.png'
 import humidityLogo from '../../resources/img/Sun/humidity.png'
 import windLogo from '../../resources/img/Sun/wind.png'
 import pressureLogo from '../../resources/img/Sun/pressure-white.png'
 import uvLogo from '../../resources/img/Sun/uv-white.png'
 
 
-const WeatherIndexes = () => {
+const WeatherIndexes = ({ city, getResource }) => {
     const [weatherData, setWeatherData] = useState({
         name: null,
         time: null,
@@ -20,6 +19,7 @@ const WeatherIndexes = () => {
         feelsLike: null,
         sunriseAm: null,
         sunsetAm: null,
+        sunnyLogo: null,
         condition: null,
         conditionText: null,
         humidityPercent: null,
@@ -29,12 +29,9 @@ const WeatherIndexes = () => {
     });
 
     useEffect(() => {
-        const weatherService = new WeatherService();
-        const id = 'Kyiv';
-
         const fetchData = async () => {
             try {
-                const res = await weatherService.getForecastIndexes(id);
+                const res = await getResource(`http://api.weatherapi.com/v1/forecast.json?key=d4482eb276b541a8a1b161131240804&q=${city}&days=5&aqi=yes&alerts=no`);
                 setWeatherData({
                     name: res.location.name,
                     time: res.location.localtime.slice(11),
@@ -43,6 +40,7 @@ const WeatherIndexes = () => {
                     feelsLike: res.current.feelslike_c,
                     sunriseAm: res.forecast.forecastday[0].astro.sunrise,
                     sunsetAm: res.forecast.forecastday[0].astro.sunset,
+                    sunnyLogo: res.current.condition?.icon || null,
                     condition: res.forecast.forecastday[0].hour[0].condition.icon,
                     conditionText: res.forecast.forecastday[0].hour[0].condition.text,
                     humidityPercent: res.current.humidity,
@@ -54,12 +52,17 @@ const WeatherIndexes = () => {
                 console.error('Error fetching weather data:', error);
             }
         };
-
+    
+        // Вызываем fetchData() сразу после монтирования компонента
         fetchData();
+    
+        const intervalId = setInterval(fetchData, 1 * 60 * 1000);
+    
+        // Возвращаем функцию очистки эффекта, чтобы сбросить интервал при размонтировании компонента или при изменении зависимостей
+        return () => clearInterval(intervalId);
+    }, [city, getResource]);
 
-    }, []); // Пустой массив означает, что этот эффект выполняется только при монтировании
-
-    const { name, time, day, selsius, feelsLike, sunriseAm, sunsetAm,
+    const { name, time, day, selsius, feelsLike, sunriseAm, sunsetAm, sunnyLogo,
         conditionText, humidityPercent, pressureIndexes, windIndexes, uvIndexes } = weatherData;
 
     return (
@@ -75,7 +78,7 @@ const WeatherIndexes = () => {
             <div className="weather__static">
                 <div className='weather__firstblock'>
                     <div>
-                        <p className="weather__firstblock-celsius">{selsius}</p>
+                        <p className="weather__firstblock-celsius">{selsius}°C</p>
                         <div className='weather__firstblock-block'>
                             <p className="weather__firstblock-like">Feels like:</p>
                             <p className="weather__firstblock-likecels">{feelsLike}°C</p>
@@ -102,7 +105,7 @@ const WeatherIndexes = () => {
 
                 <div className='weather__secondblock'>
                     <div className='weather__secondblock-logo'>
-                        <img src={SunnyLogo} alt="sunny" />
+                        <img src={sunnyLogo} alt="sunny" />
                     </div>
 
                     <p className="weather__secondblock-sunny">{conditionText}</p>
