@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './appHeader.scss';
 
 const AppHeader = ({ setCity }) => {
-    const [selectedCity, setSelectedCity] = useState(null);
+    const [selectedCity, setSelectedCity] = useState('Kyiv'); // Установка 'Kyiv' по умолчанию
 
     const handleCityClick = (city) => {
         setCity(city);
@@ -17,7 +17,7 @@ const AppHeader = ({ setCity }) => {
                         onClick={() => handleCityClick('Kyiv')}
                         className={selectedCity === 'Kyiv' ? 'selected' : ''}
                     >
-                        <a>Kiev</a>
+                        <a>Kyiv</a>
                     </li>
                     <li
                         onClick={() => handleCityClick('Zhashkiv')}
