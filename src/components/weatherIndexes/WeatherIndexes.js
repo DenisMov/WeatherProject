@@ -53,12 +53,10 @@ const WeatherIndexes = ({ city, getResource }) => {
             }
         };
     
-        // Вызываем fetchData() сразу после монтирования компонента
         fetchData();
     
         const intervalId = setInterval(fetchData, 1 * 60 * 1000);
     
-        // Возвращаем функцию очистки эффекта, чтобы сбросить интервал при размонтировании компонента или при изменении зависимостей
         return () => clearInterval(intervalId);
     }, [city, getResource]);
 
