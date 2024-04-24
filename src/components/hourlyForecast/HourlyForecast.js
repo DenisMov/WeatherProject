@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import './hourlyForecast.scss';
 
@@ -10,7 +9,7 @@ const HourlyForecast = ({ city, getResource }) => {
 
     useEffect(() => {
         
-        getResource(`http://api.weatherapi.com/v1/forecast.json?key=d4482eb276b541a8a1b161131240804&q=${city}&days=1&aqi=yes&alerts=no`)
+        getResource(`https://api.weatherapi.com/v1/forecast.json?key=d4482eb276b541a8a1b161131240804&q=${city}&days=1&aqi=yes&alerts=no`)
             .then(res => {
                 let filteredHours = res.forecast.forecastday[0].hour.filter(hour => {
                     const hourOfDay = new Date(hour.time).getHours();

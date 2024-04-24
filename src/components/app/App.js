@@ -27,7 +27,7 @@ const App = () => {
     // }, [])
 
     useEffect(() => {
-        getResource(`http://api.weatherapi.com/v1/current.json?key=d4482eb276b541a8a1b161131240804&q=${city}&days=5&aqi=yes&alerts=no`).then(data => setData(data))
+        getResource(`https://api.weatherapi.com/v1/current.json?key=d4482eb276b541a8a1b161131240804&q=${city}&days=5&aqi=yes&alerts=no`).then(data => setData(data))
     }, [city])
 
     console.log(data)

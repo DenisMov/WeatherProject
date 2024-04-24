@@ -22,7 +22,7 @@ const DaysForecast = ({ city, getResource }) => {
     });
 
     useEffect(() => {
-        getResource(`http://api.weatherapi.com/v1/forecast.json?key=d4482eb276b541a8a1b161131240804&q=${city}&days=5&aqi=yes&alerts=no`)
+        getResource(`https://api.weatherapi.com/v1/forecast.json?key=d4482eb276b541a8a1b161131240804&q=${city}&days=5&aqi=yes&alerts=no`)
             .then(res => {
                 setWeatherData({
                     weatherLogoOne: res.forecast.forecastday[0]?.hour[12]?.condition?.icon || null,
@@ -45,6 +45,7 @@ const DaysForecast = ({ city, getResource }) => {
             .catch (error => {
                 console.error('Error fetching weather data:', error);
             })
+
     }, [city, getResource]);
 
     const { weatherLogoOne, selsiusOne, dataOne, weatherLogoTwo, selsiusTwo, dataTwo, weatherLogoThree,

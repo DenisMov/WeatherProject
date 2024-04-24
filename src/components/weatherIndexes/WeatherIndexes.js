@@ -31,7 +31,7 @@ const WeatherIndexes = ({ city, getResource }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await getResource(`http://api.weatherapi.com/v1/forecast.json?key=d4482eb276b541a8a1b161131240804&q=${city}&days=5&aqi=yes&alerts=no`);
+                const res = await getResource(`https://api.weatherapi.com/v1/forecast.json?key=d4482eb276b541a8a1b161131240804&q=${city}&days=5&aqi=yes&alerts=no`);
                 setWeatherData({
                     name: res.location.name,
                     time: res.location.localtime.slice(11),
