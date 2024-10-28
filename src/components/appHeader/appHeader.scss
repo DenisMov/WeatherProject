@@ -1,48 +1,64 @@
-@import '../../style/variables.scss';
-
-
+@import "../../style/variables.scss";
 
 .app {
-    &__header {
+  &__header {
+    display: flex;
+    justify-content: center;
+  }
+  &__title {
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 37px;
+    span {
+      color: $main-color;
+    }
+  }
+
+  &__menu {
+    ul {
+      display: grid;
+      align-items: center;
+      grid-template-columns: repeat(4, 200px);
+      justify-content: center;
+      font-weight: bold;
+      font-size: 30px;
+      line-height: 32px;
+      @media (max-width: 991px) {
+        grid-template-columns: repeat(4, 160px);
+        font-size: 25px;
+      }
+      @media (max-width: 767px) {
+        grid-template-columns: repeat(4, 130px);
+        font-size: 20px;
+      }
+      @media (max-width: 575px) {
+        grid-template-columns: repeat(4, 72px);
+        font-size: 13px;
+      }
+      li {
         display: flex;
         justify-content: center;
-    }
-    &__title {
-        font-weight: bold;
-        font-size: 28px;
-        line-height: 37px;
-        span {
-            color: $main-color;
+        align-items: center;
+        margin: 0 8px;
+        color: black;
+        transition: all 0.3s ease;
+        a:hover {
+          color: $main-color;
+          filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0));
         }
+      }
     }
-    
-    &__menu {
-        ul {
-            display: grid;
-            align-items: center;
-            grid-template-columns: repeat(4, 200px);
-            justify-content: center;
-            font-weight: bold;
-            font-size: 30px;
-            line-height: 32px;
-            li {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin: 0 8px;
-                color: black;
-                transition: all 0.3s ease;
-                a:hover {
-                    color: $main-color;
-                    filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0));
-                }
-            }
-        }
-    }
+  }
 }
 .app__menu ul li.selected {
-    font-size: 35px;
-    font-weight: bold; /* Жирный шрифт для выделенного города */
-    color: $main-color;
-    filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0));
+  font-size: 35px;
+  font-weight: bold;
+  color: $main-color;
+  filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0));
+  @media (max-width: 767px) {
+    font-size: 30px;
+  }
+  @media (max-width: 575px) {
+    font-size: 20px;
+  }
 }

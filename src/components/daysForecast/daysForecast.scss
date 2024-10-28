@@ -1,209 +1,301 @@
-@import '../../style/variables.scss';
+@import "../../style/variables.scss";
 
 .timetable {
+  &__content {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 414px 870px;
+    column-gap: 60px;
+    align-items: start;
+    justify-content: center;
+  }
+  &__list {
+    display: grid;
+    height: 100%;
+    width: 414px;
+    grid-template-rows: repeat(5, 50px);
+    grid-row-gap: 10px;
+    row-gap: 10px;
+    border-radius: 30px;
+    background-color: #5a4444;
+    filter: drop-shadow(10px 10px 4px rgba(0, 0, 0, 0.5));
+    &-text {
+      margin-top: 5px;
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 48px;
+      align-items: center;
+      text-align: center;
+    }
+  }
+  &__firstday {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    grid-auto-rows: 50px;
+    &-photo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &-celsius {
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &-day {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  &__secondday {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    grid-auto-rows: 50px;
+    &-photo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &-celsius {
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &-day {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  &__thirdyday {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    grid-auto-rows: 50px;
+    &-photo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &-celsius {
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &-day {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  &__fourthday {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    grid-auto-rows: 50px;
+    &-photo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &-celsius {
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &-day {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  &__fifthday {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    grid-auto-rows: 50px;
+    &-photo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &-celsius {
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &-day {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+    column-gap: 25px;
+    row-gap: 30px;
+  }
+  &__item {
+    width: 200px;
+    height: 318px;
+    background-color: $dark;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+    padding: 15px;
+    cursor: pointer;
+    transition: 0.3s transform;
+    img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      transform: translate(-15px, -15px);
+    }
+    &_selected {
+      box-shadow: 0 5px 20px $main-color;
+      transform: translateY(-8px);
+    }
+  }
+  &__name {
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 29px;
+    text-transform: uppercase;
+    color: #fff;
+  }
+}
+
+@media (max-width: 1700px) {
+  .timetable {
     &__content {
-        margin-top: 50px;
-        display: grid;
-        grid-template-columns: 414px 870px;
-        column-gap: 60px;
-        align-items: start;
+      grid-template-columns: 35% 60%;
+      align-content: space-between;
+      align-items: center;
+      justify-items: center;
+      grid-column-gap: 30px;
+      height: auto;
     }
     &__list {
-        display: grid;
-        height: 366px;
-        width: 414px;
-        grid-template-rows: repeat(5, 50px) ;
-        grid-row-gap: 10px;
-        row-gap: 10px;
-        border-radius: 30px;
-        background-color: #5a4444;
-        filter: drop-shadow(10px 10px 4px rgba(0, 0, 0, 0.5));
-        &-text {
-            margin-top: 5px;
-            font-family: 'Poppins';
-            font-style: normal;
-            font-weight: 700;
-            font-size: 32px;
-            line-height: 48px;
-            align-items: center;
-            text-align: center;
-        }
+      width: 100%;
     }
-    &__firstday{
-        display: grid;
-        grid-template-columns: 1fr 1fr 2fr;
-        grid-auto-rows: 50px;
-        &-photo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        &-celsius {
-            font-family: 'Poppins';
-            font-style: normal;
-            font-weight: 600;
-            font-size: 24px;
-            line-height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        &-day {
-            font-style: normal;
-            font-weight: 600;
-            font-size: 20px;
-            line-height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+  }
+}
+@media (max-width: 1500px) {
+  .timetable {
+    &__list-text {
+      font-size: 27px;
     }
-    &__secondday {
-        display: grid;
-        grid-template-columns: 1fr 1fr 2fr;
-        grid-auto-rows: 50px;
-        &-photo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        &-celsius {
-            font-family: 'Poppins';
-            font-style: normal;
-            font-weight: 600;
-            font-size: 24px;
-            line-height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        &-day {
-            font-style: normal;
-            font-weight: 600;
-            font-size: 20px;
-            line-height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+  }
+}
+
+@media (max-width: 1199px) {
+  .timetable {
+    &__content {
+      grid-template-columns: auto;
+      grid-gap: 50px;
     }
-    &__thirdyday {
-        display: grid;
-        grid-template-columns: 1fr 1fr 2fr;
-        grid-auto-rows: 50px;
-        &-photo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        &-celsius {
-            font-family: 'Poppins';
-            font-style: normal;
-            font-weight: 600;
-            font-size: 24px;
-            line-height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        &-day {
-            font-style: normal;
-            font-weight: 600;
-            font-size: 20px;
-            line-height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    &__module {
+      margin: 10px 0px;
     }
-    &__fourthday {
-        display: grid;
-        grid-template-columns: 1fr 1fr 2fr;
-        grid-auto-rows: 50px;
-        &-photo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        &-celsius {
-            font-family: 'Poppins';
-            font-style: normal;
-            font-weight: 600;
-            font-size: 24px;
-            line-height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        &-day {
-            font-style: normal;
-            font-weight: 600;
-            font-size: 20px;
-            line-height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    &__list {
+      width: 700px;
+      padding: 10px 50px;
     }
-    &__fifthday {
-        display: grid;
-        grid-template-columns: 1fr 1fr 2fr;
-        grid-auto-rows: 50px;
-        &-photo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        &-celsius {
-            font-family: 'Poppins';
-            font-style: normal;
-            font-weight: 600;
-            font-size: 24px;
-            line-height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        &-day {
-            font-style: normal;
-            font-weight: 600;
-            font-size: 20px;
-            line-height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+  }
+}
+
+@media (max-width: 991px) {
+  .timetable {
+    &__list {
+      width: 590px;
+      margin: 0 auto;
     }
-    &__grid {
-        display: grid;
-        grid-template-columns: repeat(3, 200px);
-        column-gap: 25px;
-        row-gap: 30px;
-    }
-    &__item {
-        width: 200px;
-        height: 318px;
-        background-color: $dark;
-        box-shadow: 5px 5px 10px rgba(0, 0, 0, .25);
-        padding: 15px;
-        cursor: pointer;
-        transition: 0.3s transform;
-        img {
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            transform: translate(-15px, -15px);
-        }
-        &_selected {
-            box-shadow: 0 5px 20px $main-color;
-            transform: translateY(-8px);
-        }
-    }
-    &__name {
-        font-weight: bold;
+  }
+  .header {
+    &__logo {
+      h1 {
         font-size: 22px;
-        line-height: 29px;
-        text-transform: uppercase;
-        color: #fff;
+      }
+      p {
+        width: 150px;
+        font-size: 13px;
+        color: #7b7b7b;
+      }
     }
+  }
+  .Search_root__XcEei {
+    left: 0;
+    input {
+      width: 170px;
+    }
+  }
+}
+@media (max-width: 767px) {
+  .timetable {
+    &__list {
+      width: 100%;
+    }
+  }
+}
+@media (max-width: 575px) {
+  .timetable {
+    &__list {
+      width: auto;
+      grid-template-rows: auto;
+      padding: 10px 10px;
+    }
+    &__firstday,
+    &__secondday,
+    &__thirdyday,
+    &__fourthday,
+    &__fifthday {
+      grid-template-columns: 1fr 1fr 1fr;
+      width: 70px;
+      gap: 10px;
+    }
+  }
 }
