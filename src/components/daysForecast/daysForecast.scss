@@ -285,17 +285,30 @@
   .timetable {
     &__list {
       width: auto;
+      place-items: center;
       grid-template-rows: auto;
       padding: 10px 10px;
+      gap: 30px;
+      &-text {
+        font-size: 25px;
+      }
     }
     &__firstday,
     &__secondday,
     &__thirdyday,
     &__fourthday,
     &__fifthday {
-      grid-template-columns: 1fr 1fr 1fr;
-      width: 70px;
-      gap: 10px;
+      grid-template-columns: auto;
+      width: auto;
+      gap: 0;
+      grid-auto-rows: 32px;
+    }
+    &__firstday-day,
+    &__secondday-day,
+    &__thirdyday-day,
+    &__fourthday-day,
+    &__fifthday-day {
+      font-size: 18px;
     }
   }
 }

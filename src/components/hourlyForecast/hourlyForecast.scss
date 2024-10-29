@@ -140,3 +140,24 @@
     }
   }
 }
+@media (max-width: 575px) {
+  .timetable {
+    &__module {
+      width: 100%;
+      padding: 0px 35px;
+      grid-row-gap: 35px;
+    }
+    &__info {
+      grid-template-columns: auto;
+    }
+    &__hourly {
+      &-name {
+        font-size: 26px;
+        font-weight: 600;
+      }
+    }
+    &__block {
+      text-align: center;
+    }
+  }
+}
